@@ -1,0 +1,11 @@
+{
+  "name": "dsa-hash-maps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hash-maps.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
