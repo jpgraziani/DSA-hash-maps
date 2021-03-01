@@ -17,9 +17,38 @@ class HashMap {
       throw new Error('Key error');
     }
     return this._hashTable[index].value;
+  };
+
+  set(key, value) {
+    const loadRatio = (this.length + this._deleted + 1) / this._capacity;
+
+    if (loadRatio > HashMap.MAX_LOAD_RATIO) {
+      this._resize(this._capacity * HashMap.SIZE_RATIO);
+    }
+    //FIND THE SLOT WHERE THIS KEY SHOULD BE IN
+    const index = this._findSlot(key);
+
+    if (!this._hashTable[index]) {
+      this.length++;
+    }
+    this._hashTable[index] = {
+      key,
+      value,
+      DELETED: false
+    };
+    //O(1) is best & average   O(n) worst case (if collision takes place)  
   }
 
-
+  delete(key) {
+    const index = this._findSlot(key);
+    const slot = this._hashTable[index];
+    if (slot === undefined) {
+      throw new Error('Key error');
+    }
+    slot.DELETED = true;
+    this.length--;
+    this._deleted++;
+  }
 
 
 
@@ -40,6 +69,7 @@ class HashMap {
       }
     }
   };
+  //best case O(1) worstcase O(n) if you needed to search through each slot
   /* ---------------------------------- */
   /* _resize hash table */
   /* ---------------------------------- */
@@ -57,6 +87,7 @@ class HashMap {
         this._hashTable(slot.key, slot.value)
       }
     }
+    //O(1) is best & average   O(n) worst case (if collision takes place)
   };
 
   /* ---------------------------------- */
