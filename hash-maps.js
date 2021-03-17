@@ -84,7 +84,7 @@ class HashMap {
 
     for (const slot of oldSlots) {
       if (slot !== undefined && !slot.DELETED) {
-        this._hashTable(slot.key, slot.value)
+        this.set(slot.key, slot.value)
       }
     }
     //O(1) is best & average   O(n) worst case (if collision takes place)
@@ -109,4 +109,4 @@ class HashMap {
   }
 }
 
-// module.exports = HashMap;
+module.exports = HashMap;
